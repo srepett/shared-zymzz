@@ -682,3 +682,74 @@ pre {
   z-index: 999;
   display: none;
 }
+
+/* Edit Modal Styles */
+.pixel-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.pixel-modal-content {
+    background-color: var(--light-color);
+    margin: 50px auto;
+    padding: 20px;
+    border: 4px solid var(--dark-color);
+    box-shadow: 8px 8px 0 var(--dark-color);
+    max-width: 600px;
+    position: relative;
+}
+
+.pixel-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--dark-color);
+}
+
+.pixel-close:hover {
+    color: var(--accent-color);
+}
+
+.pixel-form {
+    margin-top: 15px;
+}
+
+.pixel-form-group {
+    margin-bottom: 15px;
+}
+
+.pixel-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.pixel-form-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.pixel-input {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid var(--dark-color);
+    background-color: white;
+    font-family: 'Courier New', monospace;
+}
+
+.pixel-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 5px var(--accent-color);
+}

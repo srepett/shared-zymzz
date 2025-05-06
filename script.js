@@ -1,8 +1,7 @@
-require('dotenv').config();
 const app = {
     // Configuration
     GITHUB_USERNAME: 'shinzxyz',
-    GITHUB_TOKEN: process.env.GITHUB_TOKEN
+    GITHUB_TOKEN: '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',
     REPO: 'webku',
     FILE_PATH: 'data.json',
     THEME_KEY: 'selectedTheme',
@@ -702,94 +701,249 @@ confirmAlert: function(message) {
     },
 
     renderApiItems: function() {
-        const container = document.getElementById('apiItems');
-        container.innerHTML = '';
+    const container = document.getElementById('apiItems');
+    container.innerHTML = '';
+    
+    this.data.apis.forEach((api, index) => {
+        const card = document.createElement('div');
+        card.className = 'item-card pixel-box';
         
-        this.data.apis.forEach((api, index) => {
-            const card = document.createElement('div');
-            card.className = 'item-card pixel-box';
+        const shortEndpoint = api.endpoint.length > 30 
+            ? api.endpoint.substring(0, 27) + '...' 
+            : api.endpoint;
             
-            const shortEndpoint = api.endpoint.length > 30 
-                ? api.endpoint.substring(0, 27) + '...' 
-                : api.endpoint;
+        card.innerHTML = `
+            <h3>${api.name}</h3>
+            <p><strong>Endpoint:</strong> 
+                <span title="${api.endpoint}">${shortEndpoint}</span>
+            </p>
+            <p><strong>Type:</strong> ${api.type}</p>
+            <div class="item-actions">
+                <button onclick="app.tryApi('${api.endpoint}', '${api.type}')" class="pixel-button">Try it</button>
+                <button onclick="app.copyToClipboard('${api.endpoint}')" class="pixel-button">Copy Endpoint</button>
+                ${this.isLoggedIn ? `
+                    <button onclick="app.editItem('apis', ${index})" class="pixel-button edit-btn">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button onclick="app.deleteItem('apis', ${index})" class="pixel-button delete-btn">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                ` : ''}
+            </div>
+        `;
+        container.appendChild(card);
+    });
+},
+
+renderScriptItems: function() {
+    const container = document.getElementById('scriptItems');
+    container.innerHTML = '';
+    
+    this.data.scripts.forEach((script, index) => {
+        const card = document.createElement('div');
+        card.className = 'item-card pixel-box';
+        card.innerHTML = `
+            <h3>${script.name}</h3>
+            <p><strong>Link:</strong> ${script.link}</p>
+            <div class="item-actions">
+                <button onclick="window.open('${script.link}', '_blank')" class="pixel-button">Go to Link</button>
+                <button onclick="app.copyToClipboard('${script.link}')" class="pixel-button">Copy Link</button>
+                ${this.isLoggedIn ? `
+                    <button onclick="app.editItem('scripts', ${index})" class="pixel-button edit-btn">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button onclick="app.deleteItem('scripts', ${index})" class="pixel-button delete-btn">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                ` : ''}
+            </div>
+        `;
+        container.appendChild(card);
+    });
+},
+
+renderCodeItems: function() {
+    const container = document.getElementById('codeItems');
+    container.innerHTML = '';
+
+    this.data.codes.forEach((code, index) => {
+        const card = document.createElement('div');
+        card.className = 'item-card pixel-box';
+
+        const codeContent = document.createElement('div');
+        codeContent.className = 'code-container';
+        codeContent.innerHTML = `<pre><code>${this.escapeHtml(code.code)}</code></pre>`;
+
+        const copyButton = document.createElement('button');
+        copyButton.className = 'pixel-button';
+        copyButton.innerHTML = '<i class="fas fa-copy"></i> Copy Code';
+        copyButton.addEventListener('click', () => {
+            this.copyToClipboard(code.code);
+        });
+
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'item-actions';
+        actionsDiv.appendChild(copyButton);
+
+        if (this.isLoggedIn) {
+            const editButton = document.createElement('button');
+            editButton.className = 'pixel-button edit-btn';
+            editButton.innerHTML = '<i class="fas fa-edit"></i> Edit';
+            editButton.addEventListener('click', () => this.editItem('codes', index));
+            actionsDiv.appendChild(editButton);
+            
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'pixel-button delete-btn';
+            deleteButton.innerHTML = '<i class="fas fa-trash"></i> Delete';
+            deleteButton.addEventListener('click', () => this.deleteItem('codes', index));
+            actionsDiv.appendChild(deleteButton);
+        }
+
+        const title = document.createElement('h3');
+        title.textContent = code.name;
+
+        card.appendChild(title);
+        card.appendChild(codeContent);
+        card.appendChild(actionsDiv);
+
+        container.appendChild(card);
+    });
+},
+
+editItem: function(type, index) {
+    if (!this.isLoggedIn) {
+        this.showAlert('You must be logged in to edit items');
+        return;
+    }
+
+    const item = this.data[type][index];
+    
+    // Create edit modal
+    const editModal = document.createElement('div');
+    editModal.id = 'editModal';
+    editModal.className = 'pixel-modal';
+    editModal.innerHTML = `
+        <div class="pixel-modal-content">
+            <span class="pixel-close" onclick="app.closeEditModal()">&times;</span>
+            <h2>Edit ${type.charAt(0).toUpperCase() + type.slice(1)}</h2>
+            <form id="editForm" class="pixel-form">
+                <input type="hidden" id="editItemType" value="${type}">
+                <input type="hidden" id="editItemIndex" value="${index}">
                 
-            card.innerHTML = `
-                <h3>${api.name}</h3>
-                <p><strong>Endpoint:</strong> 
-                    <span title="${api.endpoint}">${shortEndpoint}</span>
-                </p>
-                <p><strong>Type:</strong> ${api.type}</p>
-                <div class="item-actions">
-                    <button onclick="app.tryApi('${api.endpoint}', '${api.type}')" class="pixel-button">Try it</button>
-                    <button onclick="app.copyToClipboard('${api.endpoint}')" class="pixel-button">Copy Endpoint</button>
-                    ${this.isLoggedIn ? `<button onclick="app.deleteItem('apis', ${index})" class="pixel-button"><i class="fas fa-trash"></i></button>` : ''}
+                <div class="pixel-form-group">
+                    <label for="editItemName">Name:</label>
+                    <input type="text" id="editItemName" class="pixel-input" value="${this.escapeHtml(item.name)}" required>
                 </div>
-            `;
-            container.appendChild(card);
-        });
-    },
+                
+                ${type === 'apis' ? `
+                    <div class="pixel-form-group">
+                        <label for="editItemEndpoint">Endpoint:</label>
+                        <input type="text" id="editItemEndpoint" class="pixel-input" value="${this.escapeHtml(item.endpoint)}" required>
+                    </div>
+                    <div class="pixel-form-group">
+                        <label for="editItemApiType">Type:</label>
+                        <select id="editItemApiType" class="pixel-input">
+                            <option value="json" ${item.type === 'json' ? 'selected' : ''}>JSON</option>
+                            <option value="media" ${item.type === 'media' ? 'selected' : ''}>Media</option>
+                        </select>
+                    </div>
+                ` : ''}
+                
+                ${type === 'scripts' ? `
+                    <div class="pixel-form-group">
+                        <label for="editItemLink">Link:</label>
+                        <input type="text" id="editItemLink" class="pixel-input" value="${this.escapeHtml(item.link)}" required>
+                    </div>
+                ` : ''}
+                
+                ${type === 'codes' ? `
+                    <div class="pixel-form-group">
+                        <label for="editItemCode">Code:</label>
+                        <textarea id="editItemCode" class="pixel-input" rows="6" required>${this.escapeHtml(item.code)}</textarea>
+                    </div>
+                ` : ''}
+                
+                <div class="pixel-form-actions">
+                    <button type="button" onclick="app.saveEditedItem()" class="pixel-button">Save Changes</button>
+                    <button type="button" onclick="app.closeEditModal()" class="pixel-button cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    `;
+    
+    document.body.appendChild(editModal);
+    editModal.style.display = 'block';
+},
 
-    renderScriptItems: function() {
-        const container = document.getElementById('scriptItems');
-        container.innerHTML = '';
+closeEditModal: function() {
+    const editModal = document.getElementById('editModal');
+    if (editModal) {
+        editModal.remove();
+    }
+},
+
+async saveEditedItem() {
+    const type = document.getElementById('editItemType').value;
+    const index = parseInt(document.getElementById('editItemIndex').value);
+    const name = document.getElementById('editItemName').value.trim();
+    
+    if (!name) {
+        this.showAlert('Please enter a name');
+        return;
+    }
+    
+    let updatedItem;
+    
+    if (type === 'apis') {
+        const endpoint = document.getElementById('editItemEndpoint').value.trim();
+        const apiType = document.getElementById('editItemApiType').value;
         
-        this.data.scripts.forEach((script, index) => {
-            const card = document.createElement('div');
-            card.className = 'item-card pixel-box';
-            card.innerHTML = `
-                <h3>${script.name}</h3>
-                <p><strong>Link:</strong> ${script.link}</p>
-                <div class="item-actions">
-                    <button onclick="window.open('${script.link}', '_blank')" class="pixel-button">Go to Link</button>
-                    <button onclick="app.copyToClipboard('${script.link}')" class="pixel-button">Copy Link</button>
-                    ${this.isLoggedIn ? `<button onclick="app.deleteItem('scripts', ${index})" class="pixel-button"><i class="fas fa-trash"></i></button>` : ''}
-                </div>
-            `;
-            container.appendChild(card);
-        });
-    },
-
-    renderCodeItems: function() {
-        const container = document.getElementById('codeItems');
-        container.innerHTML = '';
-
-        this.data.codes.forEach((code, index) => {
-            const card = document.createElement('div');
-            card.className = 'item-card pixel-box';
-
-            const codeContent = document.createElement('div');
-            codeContent.className = 'code-container';
-            codeContent.innerHTML = `<pre><code>${this.escapeHtml(code.code)}</code></pre>`;
-
-            const copyButton = document.createElement('button');
-            copyButton.className = 'pixel-button';
-            copyButton.innerHTML = '<i class="fas fa-copy"></i> Copy Code';
-            copyButton.addEventListener('click', () => {
-                this.copyToClipboard(code.code);
-            });
-
-            const actionsDiv = document.createElement('div');
-            actionsDiv.className = 'item-actions';
-            actionsDiv.appendChild(copyButton);
-
-            if (this.isLoggedIn) {
-                const deleteButton = document.createElement('button');
-                deleteButton.className = 'pixel-button';
-                deleteButton.innerHTML = '<i class="fas fa-trash"></i> Delete';
-                deleteButton.addEventListener('click', () => this.deleteItem('codes', index));
-                actionsDiv.appendChild(deleteButton);
-            }
-
-            const title = document.createElement('h3');
-            title.textContent = code.name;
-
-            card.appendChild(title);
-            card.appendChild(codeContent);
-            card.appendChild(actionsDiv);
-
-            container.appendChild(card);
-        });
-    },
+        if (!endpoint) {
+            this.showAlert('Please enter an endpoint');
+            return;
+        }
+        
+        updatedItem = {
+            name,
+            endpoint,
+            type: apiType
+        };
+    } else if (type === 'scripts') {
+        const link = document.getElementById('editItemLink').value.trim();
+        
+        if (!link) {
+            this.showAlert('Please enter a link');
+            return;
+        }
+        
+        updatedItem = {
+            name,
+            link
+        };
+    } else if (type === 'codes') {
+        const code = document.getElementById('editItemCode').value.trim();
+        
+        if (!code) {
+            this.showAlert('Please enter code');
+            return;
+        }
+        
+        updatedItem = {
+            name,
+            code
+        };
+    }
+    
+    try {
+        this.data[type][index] = updatedItem;
+        await this.saveData();
+        this.renderData();
+        this.closeEditModal();
+        this.showAlert('Item updated successfully!');
+    } catch (error) {
+        this.showAlert('Failed to update item: ' + error.message);
+    }
+},
 
     async tryApi(endpoint, type) {
         if (type === 'json') {
@@ -962,6 +1116,160 @@ confirmAlert: function(message) {
             this.showAlert('Failed to add item: ' + error.message);
         }
     },
+   editItem: function(type, index) {
+    if (!this.isLoggedIn) {
+        this.showAlert('You must be logged in to edit items');
+        return;
+    }
+
+    const item = this.data[type][index];
+    this.showEditForm(type, item, index);
+},
+
+showEditForm: function(type, item, index) {
+    // Create or show edit modal
+    let editModal = document.getElementById('editModal');
+    if (!editModal) {
+        editModal = document.createElement('div');
+        editModal.id = 'editModal';
+        editModal.className = 'pixel-modal';
+        editModal.innerHTML = `
+            <div class="pixel-modal-content">
+                <span class="pixel-close" onclick="app.closeEditModal()">&times;</span>
+                <h2>Edit ${type === 'apis' ? 'API' : type === 'scripts' ? 'Script' : 'Code'}</h2>
+                <form id="editForm" class="pixel-form">
+                    <input type="hidden" id="editItemType" value="${type}">
+                    <input type="hidden" id="editItemIndex" value="${index}">
+                    
+                    <div class="pixel-form-group">
+                        <label for="editItemName">Name:</label>
+                        <input type="text" id="editItemName" class="pixel-input" value="${this.escapeHtml(item.name)}" required>
+                    </div>
+                    
+                    ${type === 'apis' ? `
+                        <div class="pixel-form-group">
+                            <label for="editItemEndpoint">Endpoint:</label>
+                            <input type="text" id="editItemEndpoint" class="pixel-input" value="${this.escapeHtml(item.endpoint)}" required>
+                        </div>
+                        <div class="pixel-form-group">
+                            <label for="editItemApiType">Type:</label>
+                            <select id="editItemApiType" class="pixel-input">
+                                <option value="json" ${item.type === 'json' ? 'selected' : ''}>JSON</option>
+                                <option value="media" ${item.type === 'media' ? 'selected' : ''}>Media</option>
+                            </select>
+                        </div>
+                    ` : ''}
+                    
+                    ${type === 'scripts' ? `
+                        <div class="pixel-form-group">
+                            <label for="editItemLink">Link:</label>
+                            <input type="text" id="editItemLink" class="pixel-input" value="${this.escapeHtml(item.link)}" required>
+                        </div>
+                    ` : ''}
+                    
+                    ${type === 'codes' ? `
+                        <div class="pixel-form-group">
+                            <label for="editItemCode">Code:</label>
+                            <textarea id="editItemCode" class="pixel-input" rows="6" required>${this.escapeHtml(item.code)}</textarea>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="pixel-form-actions">
+                        <button type="button" onclick="app.saveEditedItem()" class="pixel-button">Save Changes</button>
+                        <button type="button" onclick="app.closeEditModal()" class="pixel-button cancel-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        `;
+        document.body.appendChild(editModal);
+    } else {
+        // Update existing modal content
+        document.getElementById('editItemType').value = type;
+        document.getElementById('editItemIndex').value = index;
+        document.getElementById('editItemName').value = item.name;
+        
+        if (type === 'apis') {
+            document.getElementById('editItemEndpoint').value = item.endpoint;
+            document.getElementById('editItemApiType').value = item.type;
+        } else if (type === 'scripts') {
+            document.getElementById('editItemLink').value = item.link;
+        } else if (type === 'codes') {
+            document.getElementById('editItemCode').value = item.code;
+        }
+    }
+    
+    editModal.style.display = 'block';
+},
+
+closeEditModal: function() {
+    const editModal = document.getElementById('editModal');
+    if (editModal) {
+        editModal.style.display = 'none';
+    }
+},
+
+async saveEditedItem() {
+    const type = document.getElementById('editItemType').value;
+    const index = parseInt(document.getElementById('editItemIndex').value);
+    const name = document.getElementById('editItemName').value.trim();
+    
+    if (!name) {
+        this.showAlert('Please enter a name');
+        return;
+    }
+    
+    let updatedItem;
+    
+    if (type === 'apis') {
+        const endpoint = document.getElementById('editItemEndpoint').value.trim();
+        const apiType = document.getElementById('editItemApiType').value;
+        
+        if (!endpoint) {
+            this.showAlert('Please enter an endpoint');
+            return;
+        }
+        
+        updatedItem = {
+            name,
+            endpoint,
+            type: apiType
+        };
+    } else if (type === 'scripts') {
+        const link = document.getElementById('editItemLink').value.trim();
+        
+        if (!link) {
+            this.showAlert('Please enter a link');
+            return;
+        }
+        
+        updatedItem = {
+            name,
+            link
+        };
+    } else if (type === 'codes') {
+        const code = document.getElementById('editItemCode').value.trim();
+        
+        if (!code) {
+            this.showAlert('Please enter code');
+            return;
+        }
+        
+        updatedItem = {
+            name,
+            code
+        };
+    }
+    
+    try {
+        this.data[type][index] = updatedItem;
+        await this.saveData();
+        this.renderData();
+        this.closeEditModal();
+        this.showAlert('Item updated successfully!');
+    } catch (error) {
+        this.showAlert('Failed to update item: ' + error.message);
+    }
+},
 
     async deleteItem(type, index) {
     const confirmed = await this.confirmAlert('Are you sure you want to delete this item?');
