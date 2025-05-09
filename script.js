@@ -1,7 +1,7 @@
 const app = {
     // Configuration
     GITHUB_USERNAME: 'shinzxyz',
-    GITHUB_TOKEN: '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',
+    GITHUB_TOKEN: '', // awalnya kosong
     REPO: 'webku',
     FILE_PATH: 'data.json',
     THEME_KEY: 'selectedTheme',
@@ -18,6 +18,36 @@ const app = {
     currentToken: '',
     currentTheme: 'default',
 
+currentCodeFilter: ['case', 'function', 'plugin'], // Default semua filter aktif
+
+applyCodeFilter: function() {
+    const checkboxes = document.querySelectorAll('.code-filter input[type="checkbox"]:checked');
+    this.currentCodeFilter = Array.from(checkboxes).map(cb => cb.value);
+    this.renderCodeItems();
+},
+
+handleItemTypeChange: function () {
+    const type = document.getElementById('itemType').value;
+
+    // Sembunyikan semua
+    document.querySelectorAll('.api-field, .script-field, .code-field, .music-field').forEach(el => {
+        el.style.display = 'none';
+    });
+
+    // Tampilkan nama (kecuali music)
+    document.getElementById('itemName').style.display = (type !== 'music') ? 'block' : 'none';
+
+    if (type === 'apis') {
+        document.querySelectorAll('.api-field').forEach(el => el.style.display = 'block');
+    } else if (type === 'scripts') {
+        document.querySelectorAll('.script-field').forEach(el => el.style.display = 'block');
+    } else if (type === 'codes') {
+        document.querySelectorAll('.code-field').forEach(el => el.style.display = 'block');
+    } else if (type === 'music') {
+        document.querySelector('.music-field').style.display = 'block';
+    }
+},
+
     // Initialize the app
     init: function() {
         this.checkSession();
@@ -25,7 +55,87 @@ const app = {
         this.loadData();
         this.setupSectionNavigation();
         this.showSection('apis');
-        
+    setTimeout(() => {
+        this.showWelcomeAlert();
+    }, 1000);
+let messageShown = false;
+let hideTimeout;
+let lastMessage = '';
+
+// Fungsi untuk menampilkan notifikasi dengan animasi
+function showNotification(element, message) {
+    if (element.textContent === message) return; // Hindari animasi ulang untuk pesan sama
+    
+    element.textContent = message;
+    element.classList.remove('exit');
+    element.style.display = 'block';
+    
+    // Trigger reflow untuk restart animasi
+    void element.offsetWidth;
+    
+    element.classList.add('show');
+}
+
+// Fungsi untuk menyembunyikan notifikasi dengan animasi
+function hideNotification(element) {
+    element.classList.remove('show');
+    element.classList.add('exit');
+    
+    // Hapus element setelah animasi selesai
+    element.addEventListener('animationend', function handler(e) {
+        if (e.animationName === 'slideOut') {
+            element.style.display = 'none';
+            element.classList.remove('exit');
+            element.removeEventListener('animationend', handler);
+        }
+    });
+}
+
+setInterval(() => {
+    const now = new Date();
+    const clock = document.getElementById('clock');
+    const notice = document.getElementById('timeNotice');
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    const second = now.getSeconds();
+
+    // Update jam
+    const pad = (n) => n.toString().padStart(2, '0');
+    clock.textContent = `Waktu: ${pad(hour)}:${pad(minute)}:${pad(second)}`;
+
+    // Cek waktu sholat
+    let message = '';
+    if (hour === 4 || (hour === 5 && minute === 0)) {
+        message = "⏰ Jangan lupa sholat subuh ya";
+    } else if ((hour === 11 && minute >= 30) || (hour === 12 && minute <= 30)) {
+        message = "🕌 Jangan lupa sholat dzuhur ya";
+    } else if ((hour === 14 && minute >= 40) || (hour === 15 && minute <= 30)) {
+        message = "📿 Jangan lupa sholat ashar ya";
+    } else if ((hour === 17 && minute >= 30) || (hour === 18 && minute <= 30)) {
+        message = "🌙 Jangan lupa sholat maghrib ya";
+    } else if ((hour === 18 && minute >= 55) || (hour === 19 && minute <= 30)) {
+        message = "🌟 Jangan lupa sholat isya ya";
+    }
+
+    // Logika notifikasi
+    if (message && !messageShown) {
+        showNotification(notice, message);
+        messageShown = true;
+        lastMessage = message;
+
+        clearTimeout(hideTimeout);
+        hideTimeout = setTimeout(() => {
+            hideNotification(notice);
+            messageShown = false;
+        }, 10000); // Notif akan hilang setelah 10 detik
+    } else if (!message && messageShown) {
+        hideNotification(notice);
+        messageShown = false;
+        lastMessage = '';
+        clearTimeout(hideTimeout);
+    }
+
+}, 1000);
         // Initialize music player
         const music = document.getElementById('bgMusic');
         music.volume = 0.3;
@@ -66,8 +176,9 @@ const app = {
     root.style.setProperty('--light-color', '#121212');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#000000');
-    root.style.setProperty('--title-color', '#000000'); // judul juga putih
-    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--button-bg', '#0affef');
+    root.style.setProperty('--button-label-color', '#000000');
+    root.style.setProperty('--title-color', '#000000');
     break;
 
 case 'ocean':
@@ -78,8 +189,11 @@ case 'ocean':
     root.style.setProperty('--light-color', '#cceeff');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#ffffff');
-    root.style.setProperty('--title-color', '#e0f7ff');
+    root.style.setProperty('--button-bg', '#005f8b');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
     break;
+
 case 'fire':
     root.style.setProperty('--primary-color', '#ff4500');
     root.style.setProperty('--secondary-color', '#ff6347');
@@ -90,9 +204,10 @@ case 'fire':
     root.style.setProperty('--button-text', '#ffffff');
     root.style.setProperty('--button-bg', '#ff6347');
     root.style.setProperty('--button-label-color', '#ffffff');
-    root.style.setProperty('--title-color', '#330000');
+    root.style.setProperty('--title-color', '#000000');
     break;
-    case 'sakura':
+
+case 'sakura':
     root.style.setProperty('--primary-color', '#ffb7c5');
     root.style.setProperty('--secondary-color', '#ffe4ec');
     root.style.setProperty('--accent-color', '#ffdce0');
@@ -102,9 +217,10 @@ case 'fire':
     root.style.setProperty('--button-text', '#5c2a3c');
     root.style.setProperty('--button-bg', '#ffffff');
     root.style.setProperty('--button-label-color', '#5c2a3c');
-    root.style.setProperty('--title-color', '#5c2a3c');
+    root.style.setProperty('--title-color', '#000000');
     break;
-    case 'monochrome':
+
+case 'monochrome':
     root.style.setProperty('--primary-color', '#cccccc');
     root.style.setProperty('--secondary-color', '#aaaaaa');
     root.style.setProperty('--accent-color', '#888888');
@@ -114,9 +230,10 @@ case 'fire':
     root.style.setProperty('--button-text', '#000000');
     root.style.setProperty('--button-bg', '#ffffff');
     root.style.setProperty('--button-label-color', '#222222');
-    root.style.setProperty('--title-color', '#111111');
+    root.style.setProperty('--title-color', '#000000');
     break;
-    case 'lavender':
+
+case 'lavender':
     root.style.setProperty('--primary-color', '#b497bd');
     root.style.setProperty('--secondary-color', '#d4b8e7');
     root.style.setProperty('--accent-color', '#e6c7f1');
@@ -126,9 +243,10 @@ case 'fire':
     root.style.setProperty('--button-text', '#3e2f4f');
     root.style.setProperty('--button-bg', '#ffffff');
     root.style.setProperty('--button-label-color', '#3e2f4f');
-    root.style.setProperty('--title-color', '#3e2f4f');
+    root.style.setProperty('--title-color', '#000000');
     break;
-    case 'arctic':
+
+case 'arctic':
     root.style.setProperty('--primary-color', '#d0f0ff');
     root.style.setProperty('--secondary-color', '#a0d8ef');
     root.style.setProperty('--accent-color', '#70c1e5');
@@ -136,6 +254,9 @@ case 'fire':
     root.style.setProperty('--light-color', '#f0faff');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#1a1a1a');
+    root.style.setProperty('--button-bg', '#a0d8ef');
+    root.style.setProperty('--button-label-color', '#1a1a1a');
+    root.style.setProperty('--title-color', '#000000');
     break;
 
 case 'bronze':
@@ -146,6 +267,9 @@ case 'bronze':
     root.style.setProperty('--light-color', '#f5e0c3');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#2d1b0f');
+    root.style.setProperty('--button-bg', '#b87333');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
     break;
 
 case 'emerald':
@@ -156,6 +280,9 @@ case 'emerald':
     root.style.setProperty('--light-color', '#d8fce1');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#0f2a1f');
+    root.style.setProperty('--button-bg', '#3cb371');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
     break;
 
 case 'candy':
@@ -166,6 +293,9 @@ case 'candy':
     root.style.setProperty('--light-color', '#fff0f5');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#730047');
+    root.style.setProperty('--button-bg', '#ffb6c1');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
     break;
 
 case 'desert':
@@ -176,8 +306,12 @@ case 'desert':
     root.style.setProperty('--light-color', '#fdf6e3');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#3b2e19');
+    root.style.setProperty('--button-bg', '#e0b084');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
     break;
-    case 'cyberpunk':
+
+case 'cyberpunk':
     root.style.setProperty('--primary-color', '#ff0090');
     root.style.setProperty('--secondary-color', '#2f004f');
     root.style.setProperty('--accent-color', '#00ffe7');
@@ -189,6 +323,7 @@ case 'desert':
     root.style.setProperty('--button-label-color', '#ffffff');
     root.style.setProperty('--title-color', '#000000');
     break;
+
 case 'forest':
     root.style.setProperty('--primary-color', '#2e8b57');
     root.style.setProperty('--secondary-color', '#3cb371');
@@ -197,7 +332,9 @@ case 'forest':
     root.style.setProperty('--light-color', '#d0f0d0');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#102610');
-    root.style.setProperty('--title-color', '#0b3d0b');
+    root.style.setProperty('--button-bg', '#3cb371');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
     break;
 
 case 'sunset':
@@ -208,7 +345,9 @@ case 'sunset':
     root.style.setProperty('--light-color', '#fff0ec');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#4b2c5e');
-    root.style.setProperty('--title-color', '#3a1c71');
+    root.style.setProperty('--button-bg', '#feb47b');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
     break;
 
 case 'matrix':
@@ -219,7 +358,9 @@ case 'matrix':
     root.style.setProperty('--light-color', '#ccffcc');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#000000');
-    root.style.setProperty('--title-color', '#66ff66');
+    root.style.setProperty('--button-bg', '#00aa00');
+    root.style.setProperty('--button-label-color', '#000000');
+    root.style.setProperty('--title-color', '#000000');
     break;
 
 case 'pastel':
@@ -230,7 +371,9 @@ case 'pastel':
     root.style.setProperty('--light-color', '#ffffff');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#444444');
-    root.style.setProperty('--title-color', '#333333');
+    root.style.setProperty('--button-bg', '#c1f0f6');
+    root.style.setProperty('--button-label-color', '#444444');
+    root.style.setProperty('--title-color', '#000000');
     break;
 
 case 'dark':
@@ -240,9 +383,10 @@ case 'dark':
     root.style.setProperty('--dark-color', '#000000');
     root.style.setProperty('--light-color', '#4a4a4a');
     root.style.setProperty('--text-color', '#000000');
-    root.style.setProperty('--button-text', '#ffffff');
-    root.style.setProperty('--title-color', '#000000'); // ← diubah
-    root.style.setProperty('--button-label-color', '#ffffff'); // teks di atas tombol
+    root.style.setProperty('--button-text', '#000000');
+    root.style.setProperty('--button-bg', '#3d3d3d');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
     break;
 
 case 'vintage':
@@ -253,7 +397,9 @@ case 'vintage':
     root.style.setProperty('--light-color', '#f4e8d1');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#3b3024');
-    root.style.setProperty('--title-color', '#402d20');
+    root.style.setProperty('--button-bg', '#a67c52');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
     break;
 
 case 'midnight':
@@ -264,7 +410,9 @@ case 'midnight':
     root.style.setProperty('--light-color', '#4d4d80');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#ffffff');
-    root.style.setProperty('--title-color', '#ccccff');
+    root.style.setProperty('--button-bg', '#3a3a80');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
     break;
 
 case 'coffee':
@@ -275,7 +423,9 @@ case 'coffee':
     root.style.setProperty('--light-color', '#f5f5dc');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#2e1a0f');
-    root.style.setProperty('--title-color', '#1c0f08');
+    root.style.setProperty('--button-bg', '#a67b5b');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
     break;
 
 case 'rose':
@@ -286,7 +436,9 @@ case 'rose':
     root.style.setProperty('--light-color', '#fff0f5');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#3d1f2b');
-    root.style.setProperty('--title-color', '#4b0e24');
+    root.style.setProperty('--button-bg', '#ff99aa');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
     break;
 
 case 'ice':
@@ -297,20 +449,11 @@ case 'ice':
     root.style.setProperty('--light-color', '#e1f5fe');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#01579b');
-    root.style.setProperty('--title-color', '#013e6b');
+    root.style.setProperty('--button-bg', '#81d4fa');
+    root.style.setProperty('--button-label-color', '#01579b');
+    root.style.setProperty('--title-color', '#000000');
     break;
-case 'default':
-    root.style.setProperty('--primary-color', '#a8d8ea');
-    root.style.setProperty('--secondary-color', '#7ab3d0');
-    root.style.setProperty('--accent-color', '#4c8cb5');
-    root.style.setProperty('--dark-color', '#2c4a63');
-    root.style.setProperty('--light-color', '#e0f7fa');
-    root.style.setProperty('--text-color', '#000000');
-    root.style.setProperty('--button-text', '#333333');
-    root.style.setProperty('--button-bg', ''); // reset
-    root.style.setProperty('--button-label-color', '');
-    root.style.setProperty('--title-color', '');
-    break;
+
 case 'space':
     root.style.setProperty('--primary-color', '#0b0033');
     root.style.setProperty('--secondary-color', '#3700b3');
@@ -319,16 +462,22 @@ case 'space':
     root.style.setProperty('--light-color', '#d1c4e9');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#ffffff');
-    root.style.setProperty('--title-color', '#9e9eff');
+    root.style.setProperty('--button-bg', '#6200ea');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
     break;
-    default: // Default theme
-        root.style.setProperty('--primary-color', '#a8d8ea');
-        root.style.setProperty('--secondary-color', '#7ab3d0');
-        root.style.setProperty('--accent-color', '#4c8cb5');
-        root.style.setProperty('--dark-color', '#2c4a63');
-        root.style.setProperty('--light-color', '#e0f7fa');
-        root.style.setProperty('--text-color', '#000000');
-        root.style.setProperty('--button-text', '#333333');
+
+default: // Default theme
+    root.style.setProperty('--primary-color', '#a8d8ea');
+    root.style.setProperty('--secondary-color', '#7ab3d0');
+    root.style.setProperty('--accent-color', '#4c8cb5');
+    root.style.setProperty('--dark-color', '#2c4a63');
+    root.style.setProperty('--light-color', '#e0f7fa');
+    root.style.setProperty('--text-color', '#000000');
+    root.style.setProperty('--button-text', '#333333');
+    root.style.setProperty('--button-bg', '#7ab3d0');
+    root.style.setProperty('--button-label-color', '#333333');
+    root.style.setProperty('--title-color', '#000000');
 }
     },
 
@@ -429,33 +578,7 @@ case 'space':
         document.getElementById('musicModal').style.display = 'none';
     },
 
-    // Pixel Art Alert System
-    showAlert: function(message, duration = 3000) {
-        const alertBox = document.getElementById('pixelAlert');
-        const alertMessage = document.getElementById('pixelAlertMessage');
-        const alertClose = document.getElementById('pixelAlertClose');
-        const overlay = document.createElement('div');
-        overlay.className = 'alert-overlay';
-        document.body.appendChild(overlay);
-        
-        alertMessage.textContent = message;
-        alertBox.style.display = 'block';
-        overlay.style.display = 'block';
-        
-        alertClose.onclick = () => {
-            alertBox.style.display = 'none';
-            overlay.style.display = 'none';
-        };
-        
-        if (duration > 0) {
-            setTimeout(() => {
-                alertBox.style.display = 'none';
-                overlay.style.display = 'none';
-            }, duration);
-        }
-    },
-
-confirmAlert: function(message) {
+    confirmAlert: function(message) {
     return new Promise((resolve) => {
         const alertBox = document.getElementById('pixelAlert');
         const alertMessage = document.getElementById('pixelAlertMessage');
@@ -474,24 +597,39 @@ confirmAlert: function(message) {
         alertBox.style.display = 'block';
         overlay.style.display = 'block';
 
-        document.getElementById('confirmYes').onclick = () => {
+        // Fungsi untuk menutup alert
+        const closeAlert = (result) => {
             alertBox.style.display = 'none';
-            overlay.remove();
-            resolve(true);
-        };
-        document.getElementById('confirmNo').onclick = () => {
-            alertBox.style.display = 'none';
-            overlay.remove();
-            resolve(false);
+            overlay.style.display = 'none';
+            document.body.removeChild(overlay); // Pastikan overlay dihapus
+            resolve(result);
         };
 
-        alertClose.onclick = () => {
-            alertBox.style.display = 'none';
-            overlay.remove();
-            resolve(false);
-        };
+        document.getElementById('confirmYes').onclick = () => closeAlert(true);
+        document.getElementById('confirmNo').onclick = () => closeAlert(false);
+        alertClose.onclick = () => closeAlert(false);
     });
 },
+
+showAlert: function(message) {  // Hapus parameter `duration`
+    const alertBox = document.getElementById('pixelAlert');
+    const alertMessage = document.getElementById('pixelAlertMessage');
+    const alertClose = document.getElementById('pixelAlertClose');
+    const overlay = document.createElement('div');
+    overlay.className = 'alert-overlay';
+    document.body.appendChild(overlay);
+
+    alertMessage.textContent = message;
+    alertBox.style.display = 'block';
+    overlay.style.display = 'block';
+
+    alertClose.onclick = () => {
+        alertBox.style.display = 'none';
+        overlay.style.display = 'none';
+        document.body.removeChild(overlay); // Pastikan overlay dihapus
+    };
+},
+
     setupSectionNavigation: function() {
         const nav = document.querySelector('.pixel-nav');
         
@@ -525,6 +663,7 @@ confirmAlert: function(message) {
             
             // Hide all fields first
             document.getElementById('itemName').style.display = 'none';
+            document.getElementById('welcomeOverlay').style.display = 'block';
             document.querySelectorAll('.api-field').forEach(field => field.style.display = 'none');
             document.querySelectorAll('.script-field').forEach(field => field.style.display = 'none');
             document.getElementById('itemCode').style.display = 'none';
@@ -589,41 +728,42 @@ confirmAlert: function(message) {
         }
     },
 
-    login: function() {
-        const username = document.getElementById('githubUsername').value;
-        const token = document.getElementById('githubToken').value;
-        
-        if (!username || !token) {
-            this.showAlert('Please enter both username and token');
-            return;
-        }
-        
-        if (username !== this.GITHUB_USERNAME || token !== this.GITHUB_TOKEN) {
-            this.showAlert('Invalid GitHub credentials');
-            return;
-        }
-        
-        this.currentUsername = username;
-        this.currentToken = token;
-        this.isLoggedIn = true;
-        
-        sessionStorage.setItem('githubUsername', username);
-        sessionStorage.setItem('githubToken', token);
-        
-        this.updateUI();
-        this.loadData();
-    },
+login: function() {
+    const username = document.getElementById('githubUsername').value.trim();
+    const token = document.getElementById('githubToken').value.trim();
 
-    logout: function() {
-        this.isLoggedIn = false;
-        this.currentUsername = '';
-        this.currentToken = '';
-        
-        sessionStorage.removeItem('githubUsername');
-        sessionStorage.removeItem('githubToken');
-        
-        this.updateUI();
-    },
+    if (!username || !token) {
+        this.showAlert('Please enter both username and token');
+        return;
+    }
+
+    if (!token.startsWith('github_pat_11')) {
+        this.showAlert('Password Salah');
+        return;
+    }
+
+    // Simpan hanya jika token valid
+    this.currentUsername = username;
+    this.GITHUB_TOKEN = token;
+    this.isLoggedIn = true;
+
+    sessionStorage.setItem('githubUsername', username);
+    sessionStorage.setItem('githubToken', token);
+
+    this.updateUI();
+    this.loadData();
+},
+
+logout: function() {
+    this.isLoggedIn = false;
+    this.currentUsername = '';
+    this.GITHUB_TOKEN = ''; // Kosongkan kembali token saat logout
+
+    sessionStorage.removeItem('githubUsername');
+    sessionStorage.removeItem('githubToken');
+
+    location.reload(); // Full refresh agar UI benar-benar bersih
+},
 
     updateUI: function() {
         if (this.isLoggedIn) {
@@ -640,59 +780,88 @@ confirmAlert: function(message) {
     },
 
     async loadData() {
-        try {
-            const response = await fetch(`https://api.github.com/repos/${this.GITHUB_USERNAME}/${this.REPO}/contents/${this.FILE_PATH}`, {
-                headers: {
-                    'Authorization': `token ${this.GITHUB_TOKEN}`,
-                    'Accept': 'application/vnd.github.v3+json'
-                }
-            });
-            
-            if (!response.ok) {
-                throw new Error('Failed to fetch data');
-            }
-            
-            const fileData = await response.json();
-            const content = atob(fileData.content);
-            this.data = JSON.parse(content);
-            
-            // Load and initialize music if available
-            if (this.data.music) {
-                const music = document.getElementById('bgMusic');
-                // Clear existing sources
-                while (music.firstChild) {
-                    music.removeChild(music.firstChild);
-                }
-                // Add new source
-                const source = document.createElement('source');
-                source.src = this.data.music;
-                source.type = 'audio/mpeg';
-                music.appendChild(source);
-                
-                // Load the new source
-                music.load();
-                
-                // Update music info
-                if (document.getElementById('currentMusicName')) {
-                    document.getElementById('currentMusicName').textContent = 'Custom';
-                }
-            }
-            
-            this.renderData();
-        } catch (error) {
-            console.error('Error loading data:', error);
-            this.showAlert('Failed to load data. ' + error.message);
-            
-            // Initialize with empty data if loading fails
-            this.data = {
-                apis: [],
-                scripts: [],
-                codes: [],
-                music: null
-            };
-            this.renderData();
+    try {
+        console.time('Total loadData'); // Mulai pengukuran waktu
+        
+        // URL dengan cache busting
+        const url = `https://raw.githubusercontent.com/shinzxyz/webku/refs/heads/main/data.json`;
+        
+        console.time('Fetch data');
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            const rateLimitRemaining = response.headers.get('X-RateLimit-Remaining');
+            console.warn(`Rate limit remaining: ${rateLimitRemaining}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    },
+        console.timeEnd('Fetch data');
+
+        console.time('Parse content');
+        const content = await response.text();
+        console.log(`File size: ${(content.length / 1024).toFixed(2)} KB`);
+        
+        this.data = JSON.parse(content);
+        console.timeEnd('Parse content');
+
+        // Render data terlebih dahulu sebelum memuat musik
+        console.time('Render data');
+        this.renderData();
+        console.timeEnd('Render data');
+
+        // Load musik secara asynchronous setelah render utama
+        if (this.data.music) {
+            console.time('Load music');
+            await this.loadMusicAsync(this.data.music);
+            console.timeEnd('Load music');
+        }
+
+        console.timeEnd('Total loadData');
+    } catch (error) {
+        console.error('Error loading data:', error);
+        this.showAlert('Failed to load data. ' + error.message);
+
+        // Fallback data
+        this.data = {
+            apis: [],
+            scripts: [],
+            codes: [],
+            music: null
+        };
+        this.renderData();
+    }
+},
+
+// Fungsi terpisah untuk memuat musik
+async loadMusicAsync(musicUrl) {
+    return new Promise((resolve) => {
+        const music = document.getElementById('bgMusic');
+        
+        // Kosongkan player terlebih dahulu
+        while (music.firstChild) {
+            music.removeChild(music.firstChild);
+        }
+
+        const source = document.createElement('source');
+        source.src = musicUrl;
+        source.type = 'audio/mpeg';
+        music.appendChild(source);
+
+        // Event handler untuk ketika musik siap
+        const onMusicLoaded = () => {
+            music.removeEventListener('canplaythrough', onMusicLoaded);
+            
+            const musicLabel = document.getElementById('currentMusicName');
+            if (musicLabel) {
+                musicLabel.textContent = 'Custom';
+            }
+            
+            resolve();
+        };
+
+        music.addEventListener('canplaythrough', onMusicLoaded);
+        music.load();
+    });
+},
 
     renderData: function() {
         this.renderApiItems();
@@ -721,7 +890,7 @@ confirmAlert: function(message) {
             <div class="item-actions">
                 <button onclick="app.tryApi('${api.endpoint}', '${api.type}')" class="pixel-button">Try it</button>
                 <button onclick="app.copyToClipboard('${api.endpoint}')" class="pixel-button">Copy Endpoint</button>
-                ${this.isLoggedIn ? `
+                ${app.isLoggedIn ? `
                     <button onclick="app.editItem('apis', ${index})" class="pixel-button edit-btn">
                         <i class="fas fa-edit"></i> Edit
                     </button>
@@ -762,11 +931,42 @@ renderScriptItems: function() {
     });
 },
 
+showWelcomeAlert: function() {
+    // Buat elemen secara dinamis jika tidak ada
+    if (!document.getElementById('welcomeOverlay')) {
+        const welcomeHTML = `
+        <div id="welcomeOverlay" class="welcome-overlay">
+          <div id="welcomeAlert" class="pixel-welcome-alert">
+            <span class="pixel-close" onclick="app.closeWelcomeAlert()">&times;</span>
+            <h3>Welcome to YoedzX-Codez</h3>
+            <p>Jangan lupa follow channel informasi update</p>
+            <a href="https://whatsapp.com/channel/0029Vb0v3F71yT264EejzJ3e" target="_blank" class="pixel-button whatsapp-btn">
+              <i class="fab fa-whatsapp"></i> Follow
+            </a>
+          </div>
+        </div>`;
+        document.body.insertAdjacentHTML('beforeend', welcomeHTML);
+    }
+    document.getElementById('welcomeOverlay').style.display = 'block';
+},
+
+closeWelcomeAlert: function() {
+    const overlay = document.getElementById('welcomeOverlay');
+    if (overlay) {
+        overlay.style.display = 'none';
+    }
+},
+
 renderCodeItems: function() {
     const container = document.getElementById('codeItems');
     container.innerHTML = '';
 
-    this.data.codes.forEach((code, index) => {
+    // Filter codes berdasarkan kategori yang dipilih
+    const filteredCodes = this.data.codes.filter(code => {
+        return this.currentCodeFilter.includes(code.category);
+    });
+
+    filteredCodes.forEach((code, index) => {
         const card = document.createElement('div');
         card.className = 'item-card pixel-box';
 
@@ -799,8 +999,19 @@ renderCodeItems: function() {
             actionsDiv.appendChild(deleteButton);
         }
 
-        const title = document.createElement('h3');
-        title.textContent = code.name;
+        const title = document.createElement('div');
+        title.className = 'item-title';
+
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = code.name || 'Untitled';
+        title.appendChild(nameSpan);
+
+        if (code.category) {
+            const tag = document.createElement('span');
+            tag.className = 'item-category';
+            tag.textContent = `</${code.category}>`;
+            title.appendChild(tag);
+        }
 
         card.appendChild(title);
         card.appendChild(codeContent);
@@ -921,18 +1132,20 @@ async saveEditedItem() {
             link
         };
     } else if (type === 'codes') {
-        const code = document.getElementById('editItemCode').value.trim();
-        
-        if (!code) {
-            this.showAlert('Please enter code');
-            return;
-        }
-        
-        updatedItem = {
-            name,
-            code
-        };
+    const code = document.getElementById('itemCode').value.trim();
+    const category = document.getElementById('itemCodeCategory').value;
+
+    if (!code) {
+        this.showAlert('Please enter code');
+        return;
     }
+
+    newItem = {
+        name,
+        code,
+        category
+    };
+}
     
     try {
         this.data[type][index] = updatedItem;
@@ -1093,18 +1306,20 @@ async saveEditedItem() {
                 link
             };
         } else if (type === 'codes') {
-            const code = document.getElementById('itemCode').value.trim();
-            
-            if (!code) {
-                this.showAlert('Please enter code');
-                return;
-            }
-            
-            newItem = {
-                name,
-                code
-            };
-        }
+    const code = document.getElementById('itemCode').value.trim();
+    const category = document.getElementById('itemCodeCategory').value.trim();
+
+    if (!code) {
+        this.showAlert('Please enter code');
+        return;
+    }
+
+    newItem = {
+        name,
+        code,
+        category // <-- kita tambahkan properti category di sini
+    };
+}
         
         try {
             this.data[type].push(newItem);
@@ -1127,6 +1342,10 @@ async saveEditedItem() {
 },
 
 showEditForm: function(type, item, index) {
+    if (!this.isLoggedIn) {
+        this.showAlert('You must be logged in to edit items.');
+        return;
+    }
     // Create or show edit modal
     let editModal = document.getElementById('editModal');
     if (!editModal) {
@@ -1348,7 +1567,16 @@ async saveEditedItem() {
             .replace(/\r/g, '\\r')
             .replace(/\t/g, '\\t');
     },
-
+    
+       // Fungsi untuk menampilkan/menghilangkan form login
+    toggleLoginForm: function() {
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm.style.display === 'none') {
+            loginForm.style.display = 'block';  // Tampilkan form login
+        } else {
+            loginForm.style.display = 'none';   // Sembunyikan form login
+        }
+    },
     // Start the application
     start: function() {
         document.addEventListener('DOMContentLoaded', () => this.init());
