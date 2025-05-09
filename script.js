@@ -468,15 +468,15 @@ case 'space':
     break;
 
 default: // Default theme
-    root.style.setProperty('--primary-color', '#a8d8ea');
-    root.style.setProperty('--secondary-color', '#7ab3d0');
-    root.style.setProperty('--accent-color', '#4c8cb5');
-    root.style.setProperty('--dark-color', '#2c4a63');
-    root.style.setProperty('--light-color', '#e0f7fa');
+    root.style.setProperty('--primary-color', '#ff5c8a');
+    root.style.setProperty('--secondary-color', '#ff99aa');
+    root.style.setProperty('--accent-color', '#ffccd5');
+    root.style.setProperty('--dark-color', '#7a2e4d');
+    root.style.setProperty('--light-color', '#fff0f5');
     root.style.setProperty('--text-color', '#000000');
-    root.style.setProperty('--button-text', '#333333');
-    root.style.setProperty('--button-bg', '#7ab3d0');
-    root.style.setProperty('--button-label-color', '#333333');
+    root.style.setProperty('--button-text', '#3d1f2b');
+    root.style.setProperty('--button-bg', '#ff99aa');
+    root.style.setProperty('--button-label-color', '#ffffff');
     root.style.setProperty('--title-color', '#000000');
 }
     },

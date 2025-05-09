@@ -3,16 +3,16 @@
 }
 
 :root {
-    --primary-color: #a8d8ea
-    --secondary-color: #7ab3d0
-    --accent-color: #4c8cb5
-    --dark-color: #2c4a63
-    --light-color: #e0f7fa
+    --primary-color: #ff5c8a
+    --secondary-color: #ff99aa
+    --accent-color: #ffccd5
+    --dark-color: #7a2e4d
+    --light-color: #fff0f5
     --text-color: #000000
-    --button-text: #333333
-    --button-bg: #7ab3d0
-    --button-label-color: #333333
-    --title-color: #2c4a63
+    --button-text: #3d1f2b
+    --button-bg: #ff99aa
+    --button-label-color: #ffffff
+    --title-color: #000000
 }
 
 h1, h2, h3, h4 {
