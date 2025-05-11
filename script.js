@@ -173,9 +173,9 @@ setInterval(() => {
     root.style.setProperty('--secondary-color', '#0affef');
     root.style.setProperty('--accent-color', '#ff0266');
     root.style.setProperty('--dark-color', '#000000');
-    root.style.setProperty('--light-color', '#121212');
+    root.style.setProperty('--light-color', '#ffffff');
     root.style.setProperty('--text-color', '#000000');
-    root.style.setProperty('--button-text', '#000000');
+    root.style.setProperty('--button-text', '#ffffff');
     root.style.setProperty('--button-bg', '#0affef');
     root.style.setProperty('--button-label-color', '#000000');
     root.style.setProperty('--title-color', '#000000');
@@ -316,11 +316,11 @@ case 'cyberpunk':
     root.style.setProperty('--secondary-color', '#2f004f');
     root.style.setProperty('--accent-color', '#00ffe7');
     root.style.setProperty('--dark-color', '#0d0d0d');
-    root.style.setProperty('--light-color', '#1a1a1a');
+    root.style.setProperty('--light-color', '#ffffff');
     root.style.setProperty('--text-color', '#000000');
     root.style.setProperty('--button-text', '#0d0d0d');
     root.style.setProperty('--button-bg', '#00ffe7');
-    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--button-label-color', '#000000');
     root.style.setProperty('--title-color', '#000000');
     break;
 
@@ -428,17 +428,17 @@ case 'coffee':
     root.style.setProperty('--title-color', '#000000');
     break;
 
-case 'rose':
-    root.style.setProperty('--primary-color', '#ff5c8a');
-    root.style.setProperty('--secondary-color', '#ff99aa');
-    root.style.setProperty('--accent-color', '#ffccd5');
-    root.style.setProperty('--dark-color', '#7a2e4d');
-    root.style.setProperty('--light-color', '#fff0f5');
-    root.style.setProperty('--text-color', '#000000');
-    root.style.setProperty('--button-text', '#3d1f2b');
-    root.style.setProperty('--button-bg', '#ff99aa');
+case 'blue':
+    root.style.setProperty('--primary-color', '#7da6ff');
+    root.style.setProperty('--secondary-color', '#a7c4ff');
+    root.style.setProperty('--accent-color', '#5c89c5');
+    root.style.setProperty('--dark-color', '#4a6fa5');
+    root.style.setProperty('--light-color', '#eef4ff');
+    root.style.setProperty('--text-color', '#1e2a3a');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#7da6ff');
     root.style.setProperty('--button-label-color', '#ffffff');
-    root.style.setProperty('--title-color', '#000000');
+    root.style.setProperty('--title-color', '#1e2a3a');
     break;
 
 case 'ice':
@@ -457,7 +457,7 @@ case 'ice':
 case 'space':
     root.style.setProperty('--primary-color', '#0b0033');
     root.style.setProperty('--secondary-color', '#3700b3');
-    root.style.setProperty('--accent-color', '#6200ea');
+    root.style.setProperty('--accent-color', '#51257D');
     root.style.setProperty('--dark-color', '#000000');
     root.style.setProperty('--light-color', '#d1c4e9');
     root.style.setProperty('--text-color', '#000000');
@@ -466,7 +466,459 @@ case 'space':
     root.style.setProperty('--button-label-color', '#ffffff');
     root.style.setProperty('--title-color', '#000000');
     break;
+case 'aqua':
+    root.style.setProperty('--primary-color', '#00ffff');
+    root.style.setProperty('--secondary-color', '#7fffd4');
+    root.style.setProperty('--accent-color', '#e0ffff');
+    root.style.setProperty('--dark-color', '#008b8b');
+    root.style.setProperty('--light-color', '#f0ffff');
+    root.style.setProperty('--text-color', '#004d4d');
+    root.style.setProperty('--button-text', '#004d4d');
+    root.style.setProperty('--button-bg', '#00ffff');
+    root.style.setProperty('--button-label-color', '#000000');
+    root.style.setProperty('--title-color', '#004d4d');
+    break;
 
+case 'sky':
+    root.style.setProperty('--primary-color', '#87ceeb');
+    root.style.setProperty('--secondary-color', '#b0e0e6');
+    root.style.setProperty('--accent-color', '#d0f0ff');
+    root.style.setProperty('--dark-color', '#4682b4');
+    root.style.setProperty('--light-color', '#e6f7ff');
+    root.style.setProperty('--text-color', '#003366');
+    root.style.setProperty('--button-text', '#003366');
+    root.style.setProperty('--button-bg', '#87ceeb');
+    root.style.setProperty('--button-label-color', '#000000');
+    root.style.setProperty('--title-color', '#003366');
+    break;
+
+case 'teal':
+    root.style.setProperty('--primary-color', '#008080');
+    root.style.setProperty('--secondary-color', '#20b2aa');
+    root.style.setProperty('--accent-color', '#40e0d0');
+    root.style.setProperty('--dark-color', '#004d4d');
+    root.style.setProperty('--light-color', '#ccffff');
+    root.style.setProperty('--text-color', '#002929');
+    root.style.setProperty('--button-text', '#002929');
+    root.style.setProperty('--button-bg', '#20b2aa');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#002929');
+    break;
+
+case 'sapphire':
+    root.style.setProperty('--primary-color', '#0f52ba');
+    root.style.setProperty('--secondary-color', '#4682b4');
+    root.style.setProperty('--accent-color', '#a9c9ff');
+    root.style.setProperty('--dark-color', '#002147');
+    root.style.setProperty('--light-color', '#ddeeff');
+    root.style.setProperty('--text-color', '#001733');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#0f52ba');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#001733');
+    break;
+
+case 'navy':
+    root.style.setProperty('--primary-color', '#000080');
+    root.style.setProperty('--secondary-color', '#0000cd');
+    root.style.setProperty('--accent-color', '#4169e1');
+    root.style.setProperty('--dark-color', '#00004d');
+    root.style.setProperty('--light-color', '#dbe9ff');
+    root.style.setProperty('--text-color', '#ffffff');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#0000cd');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#ffffff');
+    break;
+
+case 'lavender':
+    root.style.setProperty('--primary-color', '#e6e6fa');
+    root.style.setProperty('--secondary-color', '#d8bfd8');
+    root.style.setProperty('--accent-color', '#f3e8ff');
+    root.style.setProperty('--dark-color', '#9370db');
+    root.style.setProperty('--light-color', '#faf5ff');
+    root.style.setProperty('--text-color', '#4b0082');
+    root.style.setProperty('--button-text', '#4b0082');
+    root.style.setProperty('--button-bg', '#d8bfd8');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#4b0082');
+    break;
+
+case 'blossom':
+    root.style.setProperty('--primary-color', '#ffb7c5');
+    root.style.setProperty('--secondary-color', '#ffa6c9');
+    root.style.setProperty('--accent-color', '#ffd5e5');
+    root.style.setProperty('--dark-color', '#ff69b4');
+    root.style.setProperty('--light-color', '#fff0f5');
+    root.style.setProperty('--text-color', '#8b1c62');
+    root.style.setProperty('--button-text', '#8b1c62');
+    root.style.setProperty('--button-bg', '#ffb7c5');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#8b1c62');
+    break;
+
+case 'maroon':
+    root.style.setProperty('--primary-color', '#800000');
+    root.style.setProperty('--secondary-color', '#a52a2a');
+    root.style.setProperty('--accent-color', '#cd5c5c');
+    root.style.setProperty('--dark-color', '#400000');
+    root.style.setProperty('--light-color', '#ffcccc');
+    root.style.setProperty('--text-color', '#ffffff');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#a52a2a');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#ffffff');
+    break;
+
+case 'onyx':
+    root.style.setProperty('--primary-color', '#353839');
+    root.style.setProperty('--secondary-color', '#43464b');
+    root.style.setProperty('--accent-color', '#696969');
+    root.style.setProperty('--dark-color', '#111314');
+    root.style.setProperty('--light-color', '#a9a9a9');
+    root.style.setProperty('--text-color', '#ffffff');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#43464b');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#ffffff');
+    break;
+
+case 'bronze':
+    root.style.setProperty('--primary-color', '#cd7f32');
+    root.style.setProperty('--secondary-color', '#b87333');
+    root.style.setProperty('--accent-color', '#e0b074');
+    root.style.setProperty('--dark-color', '#5b3a0a');
+    root.style.setProperty('--light-color', '#f5e0c3');
+    root.style.setProperty('--text-color', '#3a2506');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#b87333');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#3a2506');
+    break;
+
+case 'emerald':
+    root.style.setProperty('--primary-color', '#50c878');
+    root.style.setProperty('--secondary-color', '#3eb489');
+    root.style.setProperty('--accent-color', '#a1e8af');
+    root.style.setProperty('--dark-color', '#20603d');
+    root.style.setProperty('--light-color', '#e0f8e0');
+    root.style.setProperty('--text-color', '#104020');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#3eb489');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#104020');
+    break;
+
+case 'jade':
+    root.style.setProperty('--primary-color', '#00a86b');
+    root.style.setProperty('--secondary-color', '#5bb381');
+    root.style.setProperty('--accent-color', '#a2f5bf');
+    root.style.setProperty('--dark-color', '#11694e');
+    root.style.setProperty('--light-color', '#d9fff0');
+    root.style.setProperty('--text-color', '#003d2c');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#5bb381');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#003d2c');
+    break;
+
+case 'forest':
+    root.style.setProperty('--primary-color', '#228b22');
+    root.style.setProperty('--secondary-color', '#32cd32');
+    root.style.setProperty('--accent-color', '#90ee90');
+    root.style.setProperty('--dark-color', '#145214');
+    root.style.setProperty('--light-color', '#d9f5d9');
+    root.style.setProperty('--text-color', '#0a320a');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#32cd32');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#0a320a');
+    break;
+
+case 'midnight':
+    root.style.setProperty('--primary-color', '#191970');
+    root.style.setProperty('--secondary-color', '#000080');
+    root.style.setProperty('--accent-color', '#4169e1');
+    root.style.setProperty('--dark-color', '#00004d');
+    root.style.setProperty('--light-color', '#e0e8ff');
+    root.style.setProperty('--text-color', '#ffffff');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#000080');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#ffffff');
+    break;
+
+case 'obsidian':
+    root.style.setProperty('--primary-color', '#0b0c10');
+    root.style.setProperty('--secondary-color', '#1f2833');
+    root.style.setProperty('--accent-color', '#45a29e');
+    root.style.setProperty('--dark-color', '#000000');
+    root.style.setProperty('--light-color', '#c5c6c7');
+    root.style.setProperty('--text-color', '#66fcf1');
+    root.style.setProperty('--button-text', '#66fcf1');
+    root.style.setProperty('--button-bg', '#1f2833');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#66fcf1');
+    break;
+case 'mint':
+    root.style.setProperty('--primary-color', '#a2e0d0');
+    root.style.setProperty('--secondary-color', '#c7f0e0');
+    root.style.setProperty('--accent-color', '#e0f7f0');
+    root.style.setProperty('--dark-color', '#5a8c7d');
+    root.style.setProperty('--light-color', '#f5fffc');
+    root.style.setProperty('--text-color', '#2d4a43');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#5a8c7d');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#2d4a43');
+    break;
+
+case 'peach':
+    root.style.setProperty('--primary-color', '#ffb7a0');
+    root.style.setProperty('--secondary-color', '#ffd5c2');
+    root.style.setProperty('--accent-color', '#ffe8dd');
+    root.style.setProperty('--dark-color', '#c97c5d');
+    root.style.setProperty('--light-color', '#fff5f0');
+    root.style.setProperty('--text-color', '#5a3a2d');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#c97c5d');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#5a3a2d');
+    break;
+
+case 'lilac':
+    root.style.setProperty('--primary-color', '#d0a2e0');
+    root.style.setProperty('--secondary-color', '#e0c7f0');
+    root.style.setProperty('--accent-color', '#f0e0f7');
+    root.style.setProperty('--dark-color', '#7d5a8c');
+    root.style.setProperty('--light-color', '#faf5ff');
+    root.style.setProperty('--text-color', '#4a2d5a');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#7d5a8c');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#4a2d5a');
+    break;
+
+case 'honey':
+    root.style.setProperty('--primary-color', '#ffd700');
+    root.style.setProperty('--secondary-color', '#ffe55c');
+    root.style.setProperty('--accent-color', '#fff2aa');
+    root.style.setProperty('--dark-color', '#b38f00');
+    root.style.setProperty('--light-color', '#fffae5');
+    root.style.setProperty('--text-color', '#4a3d00');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#b38f00');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#4a3d00');
+    break;
+
+case 'sage':
+    root.style.setProperty('--primary-color', '#b8c8a0');
+    root.style.setProperty('--secondary-color', '#d0e0b8');
+    root.style.setProperty('--accent-color', '#e8f0d0');
+    root.style.setProperty('--dark-color', '#6a7d5a');
+    root.style.setProperty('--light-color', '#f5faf0');
+    root.style.setProperty('--text-color', '#3a4a2d');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#6a7d5a');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#3a4a2d');
+    break;
+
+case 'sky':
+    root.style.setProperty('--primary-color', '#87ceeb');
+    root.style.setProperty('--secondary-color', '#b0e0e6');
+    root.style.setProperty('--accent-color', '#d0f0f7');
+    root.style.setProperty('--dark-color', '#4682b4');
+    root.style.setProperty('--light-color', '#f0faff');
+    root.style.setProperty('--text-color', '#2d4a5a');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#4682b4');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#2d4a5a');
+    break;
+
+case 'blush':
+    root.style.setProperty('--primary-color', '#ffb6c1');
+    root.style.setProperty('--secondary-color', '#ffd1d6');
+    root.style.setProperty('--accent-color', '#ffe8eb');
+    root.style.setProperty('--dark-color', '#c97d8c');
+    root.style.setProperty('--light-color', '#fff5f7');
+    root.style.setProperty('--text-color', '#5a2d3a');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#c97d8c');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#5a2d3a');
+    break;
+
+case 'mocha':
+    root.style.setProperty('--primary-color', '#d2b48c');
+    root.style.setProperty('--secondary-color', '#e0c7a8');
+    root.style.setProperty('--accent-color', '#f0e0c7');
+    root.style.setProperty('--dark-color', '#8c6d4a');
+    root.style.setProperty('--light-color', '#faf5f0');
+    root.style.setProperty('--text-color', '#4a3a2d');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#8c6d4a');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#4a3a2d');
+    break;
+
+case 'seafoam':
+    root.style.setProperty('--primary-color', '#9fe2bf');
+    root.style.setProperty('--secondary-color', '#c1f0d0');
+    root.style.setProperty('--accent-color', '#e0f7e8');
+    root.style.setProperty('--dark-color', '#5a8c7d');
+    root.style.setProperty('--light-color', '#f0fff5');
+    root.style.setProperty('--text-color', '#2d5a4a');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#5a8c7d');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#2d5a4a');
+    break;
+
+case 'orchid':
+    root.style.setProperty('--primary-color', '#da70d6');
+    root.style.setProperty('--secondary-color', '#e8a0e6');
+    root.style.setProperty('--accent-color', '#f5d0f0');
+    root.style.setProperty('--dark-color', '#8c4a88');
+    root.style.setProperty('--light-color', '#faf0fa');
+    root.style.setProperty('--text-color', '#5a2d58');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#8c4a88');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#5a2d58');
+    break;
+// Additional Theme Cases
+case 'rosegold':
+    root.style.setProperty('--primary-color', '#e0bfb8');
+    root.style.setProperty('--secondary-color', '#f0d7d0');
+    root.style.setProperty('--accent-color', '#fae8e5');
+    root.style.setProperty('--dark-color', '#b38b82');
+    root.style.setProperty('--light-color', '#fff5f2');
+    root.style.setProperty('--text-color', '#4a3a35');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#b38b82');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#4a3a35');
+    break;
+
+case 'amethyst':
+    root.style.setProperty('--primary-color', '#9966cc');
+    root.style.setProperty('--secondary-color', '#c5a3e6');
+    root.style.setProperty('--accent-color', '#e0d0f0');
+    root.style.setProperty('--dark-color', '#6a3d8c');
+    root.style.setProperty('--light-color', '#f5f0ff');
+    root.style.setProperty('--text-color', '#3d2d5a');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#6a3d8c');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#3d2d5a');
+    break;
+
+case 'honeydew':
+    root.style.setProperty('--primary-color', '#f0fff0');
+    root.style.setProperty('--secondary-color', '#e0f0e0');
+    root.style.setProperty('--accent-color', '#c0e0c0');
+    root.style.setProperty('--dark-color', '#8cb38c');
+    root.style.setProperty('--light-color', '#f5fff5');
+    root.style.setProperty('--text-color', '#2d4a2d');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#8cb38c');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#2d4a2d');
+    break;
+
+case 'twilight':
+    root.style.setProperty('--primary-color', '#58427c');
+    root.style.setProperty('--secondary-color', '#7d5a8c');
+    root.style.setProperty('--accent-color', '#a38cb3');
+    root.style.setProperty('--dark-color', '#382a4a');
+    root.style.setProperty('--light-color', '#e0d0f0');
+    root.style.setProperty('--text-color', '#000000');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#7d5a8c');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
+    break;
+
+case 'pear':
+    root.style.setProperty('--primary-color', '#d1e231');
+    root.style.setProperty('--secondary-color', '#e0f050');
+    root.style.setProperty('--accent-color', '#f0ff80');
+    root.style.setProperty('--dark-color', '#8ca82d');
+    root.style.setProperty('--light-color', '#f5ffd0');
+    root.style.setProperty('--text-color', '#3a4a1d');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#8ca82d');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#3a4a1d');
+    break;
+
+case 'denim':
+    root.style.setProperty('--primary-color', '#1560bd');
+    root.style.setProperty('--secondary-color', '#5b9bd5');
+    root.style.setProperty('--accent-color', '#a7c7e7');
+    root.style.setProperty('--dark-color', '#0d3c78');
+    root.style.setProperty('--light-color', '#e0e8f0');
+    root.style.setProperty('--text-color', '#000000');
+    root.style.setProperty('--button-text', '#000000');
+    root.style.setProperty('--button-bg', '#0d3c78');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
+    break;
+
+case 'buttercup':
+    root.style.setProperty('--primary-color', '#f5d300');
+    root.style.setProperty('--secondary-color', '#ffe55c');
+    root.style.setProperty('--accent-color', '#fff2aa');
+    root.style.setProperty('--dark-color', '#c7a500');
+    root.style.setProperty('--light-color', '#fffae5');
+    root.style.setProperty('--text-color', '#4a3d00');
+    root.style.setProperty('--button-text', '#000000');
+    root.style.setProperty('--button-bg', '#c7a500');
+    root.style.setProperty('--button-label-color', '#000000');
+    root.style.setProperty('--title-color', '#4a3d00');
+    break;
+
+case 'slate':
+    root.style.setProperty('--primary-color', '#708090');
+    root.style.setProperty('--secondary-color', '#98a8b8');
+    root.style.setProperty('--accent-color', '#c0d0e0');
+    root.style.setProperty('--dark-color', '#4a5a6a');
+    root.style.setProperty('--light-color', '#f0f5fa');
+    root.style.setProperty('--text-color', '#2d3a4a');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#4a5a6a');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#2d3a4a');
+    break;
+
+case 'tangerine':
+    root.style.setProperty('--primary-color', '#f28500');
+    root.style.setProperty('--secondary-color', '#ffa54f');
+    root.style.setProperty('--accent-color', '#ffc08a');
+    root.style.setProperty('--dark-color', '#c05a00');
+    root.style.setProperty('--light-color', '#fff5e5');
+    root.style.setProperty('--text-color', '#5a3a1d');
+    root.style.setProperty('--button-text', '#ffffff');
+    root.style.setProperty('--button-bg', '#c05a00');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#5a3a1d');
+    break;
+
+case 'mystic':
+    root.style.setProperty('--primary-color', '#8a2be2');
+    root.style.setProperty('--secondary-color', '#b57edc');
+    root.style.setProperty('--accent-color', '#d0a3f0');
+    root.style.setProperty('--dark-color', '#5f00a8');
+    root.style.setProperty('--light-color', '#f0e5ff');
+    root.style.setProperty('--text-color', '#000000');
+    root.style.setProperty('--button-text', '#000000');
+    root.style.setProperty('--button-bg', '#5f00a8');
+    root.style.setProperty('--button-label-color', '#ffffff');
+    root.style.setProperty('--title-color', '#000000');
+    break;
 default: // Default theme
     root.style.setProperty('--primary-color', '#ff5c8a');
     root.style.setProperty('--secondary-color', '#ff99aa');
@@ -1159,52 +1611,69 @@ async saveEditedItem() {
 },
 
     async tryApi(endpoint, type) {
-        if (type === 'json') {
-            const modal = document.getElementById('outputModal');
-            const output = document.getElementById('apiOutput');
+    if (type === 'json') {
+        const modal = document.getElementById('outputModal');
+        const output = document.getElementById('apiOutput');
+        
+        output.innerHTML = '<div class="loading-spinner"></div><p>Loading...</p>';
+        modal.style.display = 'block';
+
+        try {
+            if (!endpoint.startsWith('http')) {
+                throw new Error('Invalid URL - must start with http:// or https://');
+            }
+
+            const response = await fetch(endpoint, {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const jsonData = await response.json();
+            const formattedJson = JSON.stringify(jsonData, null, 2);
             
-            output.innerHTML = '<div class="loading-spinner"></div><p>Loading...</p>';
-            modal.style.display = 'block';
-
-            try {
-                if (!endpoint.startsWith('http')) {
-                    throw new Error('Invalid URL - must start with http:// or https://');
-                }
-
-                const response = await fetch(endpoint, {
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const jsonData = await response.json();
-                output.innerHTML = `
-                    <div class="response-header">
-                        <h4>JSON Response</h4>
-                        <button onclick="app.copyToClipboard(JSON.stringify(${JSON.stringify(jsonData, null, 2)}))" 
-                                class="pixel-button small">
-                            <i class="fas fa-copy"></i> Copy JSON
+            // Buat elemen secara terpisah untuk menghindari masalah escaping
+            output.innerHTML = `
+                <div class="endpoint-display">
+                    <h4>Endpoint:</h4>
+                    <div class="endpoint-container">
+                        <code>${endpoint}</code>
+                        <button onclick="app.copyToClipboard('${endpoint.replace(/'/g, "\\'")}')" class="pixel-button small">
+                            <i class="fas fa-copy"></i> Copy URL
                         </button>
                     </div>
-                    <pre>${JSON.stringify(jsonData, null, 2)}</pre>
-                `;
-            } catch (error) {
-                output.innerHTML = `
-                    <div class="error-message">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <h4>Error</h4>
-                        <p>${error.message}</p>
-                    </div>
-                `;
-            }
-        } else {
-            window.open(endpoint, '_blank');
+                </div>
+                <div class="response-header">
+                    <h4>JSON Response</h4>
+                    <button id="copyJsonBtn" class="pixel-button small">
+                        <i class="fas fa-copy"></i> Copy JSON
+                    </button>
+                </div>
+                <pre id="jsonContent">${formattedJson}</pre>
+            `;
+
+            // Tambahkan event listener setelah elemen dibuat
+            document.getElementById('copyJsonBtn').addEventListener('click', () => {
+                app.copyToClipboard(formattedJson);
+            });
+
+        } catch (error) {
+            output.innerHTML = `
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h4>Error</h4>
+                    <p>${error.message}</p>
+                </div>
+            `;
         }
-    },
+    } else {
+        window.open(endpoint, '_blank');
+    }
+},
 
     closeModal: function() {
         document.getElementById('outputModal').style.display = 'none';

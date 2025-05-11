@@ -3,16 +3,16 @@
 }
 
 :root {
-    --primary-color: #ff5c8a
-    --secondary-color: #ff99aa
-    --accent-color: #ffccd5
-    --dark-color: #7a2e4d
-    --light-color: #fff0f5
-    --text-color: #000000
-    --button-text: #3d1f2b
-    --button-bg: #ff99aa
-    --button-label-color: #ffffff
-    --title-color: #000000
+    --primary-color: #ff5c8a;
+    --secondary-color: #ff99aa;
+    --accent-color: #ffccd5;
+    --dark-color: #7a2e4d;
+    --light-color: #fff0f5;
+    --text-color: #000000;
+    --button-text: #3d1f2b;
+    --button-bg: #ff99aa;
+    --button-label-color: #ffffff;
+    --title-color: #000000;
 }
 
 h1, h2, h3, h4 {
@@ -28,15 +28,13 @@ body {
     line-height: 1.6;
 }
 
-/* Container and general layout */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background-color: var(--primary-color); /* Ensure container has the blue bg */
+    background-color: var(--primary-color);
 }
 
-/* Header styling */
 .pixel-header {
     background-color: var(--secondary-color);
     padding: 15px;
@@ -52,7 +50,6 @@ body {
     text-shadow: 2px 2px 0 var(--dark-color);
 }
 
-/* Theme Settings Styles */
 .settings-btn {
     padding: 8px;
     min-width: auto;
@@ -64,7 +61,6 @@ body {
     padding: 10px;
 }
 
-/* Theme Selector Styles */
 .theme-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -78,10 +74,7 @@ body {
     align-items: center;
     padding: 10px;
     transition: transform 0.2s;
-}
-
-.theme-option {
-  color: var(--button-label-color, var(--text-color));
+    color: var(--button-label-color, var(--text-color));
 }
 
 .theme-option:hover {
@@ -96,12 +89,10 @@ body {
 .theme-preview {
     width: 40px;
     height: 20px;
-    border-radius: 4px;
     margin-bottom: 5px;
 }
 
-/* Contoh preview theme style */
-.default-theme    { background: #a8d8ea; }
+.default-theme    { background: #ff5c8a; }
 .dark-theme       { background: #1e1e1e; }
 .ocean-theme      { background: #0077be; }
 .forest-theme     { background: #2e8b57; }
@@ -112,7 +103,7 @@ body {
 .vintage-theme    { background: #c9b29b; }
 .midnight-theme   { background: #1a1a40; }
 .coffee-theme     { background: #6f4e37; }
-.rose-theme       { background: #ff5c8a; }
+.blue-theme       { background: #a8d8ea; }
 .ice-theme        { background: #b3e5fc; }
 .space-theme      { background: #0b0033; }
 .cyberpunk-theme  { background: #ff0090; }
@@ -125,6 +116,52 @@ body {
 .emerald-theme    { background: #50c878; }
 .candy-theme      { background: #ff69b4; }
 .desert-theme     { background: #edc9af; }
+.rosegold-theme    { background: #e0bfb8; }
+.amethyst-theme    { background: #9966cc; }
+.honeydew-theme    { background: #f0fff0; }
+.twilight-theme    { background: #58427c; }
+.pear-theme        { background: #d1e231; }
+.denim-theme       { background: #1560bd; }
+.buttercup-theme   { background: #f5d300; }
+.slate-theme       { background: #708090; }
+.tangerine-theme   { background: #f28500; }
+.mystic-theme      { background: #8a2be2; }
+.mint-theme        { background: #a2e0d0; }
+.peach-theme       { background: #ffb7a0; }
+.lilac-theme       { background: #d0a2e0; }
+.honey-theme       { background: #ffd700; }
+.sage-theme        { background: #b8c8a0; }
+.sky-theme         { background: #87ceeb; }
+.blush-theme       { background: #ffb6c1; }
+.mocha-theme       { background: #d2b48c; }
+.seafoam-theme     { background: #9fe2bf; }
+.orchid-theme      { background: #da70d6; }
+.endpoint-display {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f5f5f5;
+}
+
+.endpoint-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.endpoint-container code {
+    flex-grow: 1;
+    padding: 8px;
+    background-color: #e9e9e9;
+    overflow-x: auto;
+}
+
+.response-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
 
 .theme-preview-secondary {
     position: absolute;
@@ -135,7 +172,7 @@ body {
 }
 
 .default-theme {
-    background: linear-gradient(135deg, #a8d8ea 0%, #7ab3d0 50%, #4c8cb5 100%);
+    background: linear-gradient(135deg, #FFCEE5 0%, #FF88C0 50%, #ff5c8a 100%);
 }
 
 .dark-theme {
@@ -154,7 +191,7 @@ body {
 
 .pixel-nav {
     display: grid;
-    grid-template-columns: repeat(3, 80px); /* dari 20px jadi 40px */
+    grid-template-columns: repeat(3, 80px);
     gap: 10px;
     margin-bottom: 20px;
 }
@@ -175,14 +212,13 @@ body {
     text-align: center;
     padding: 10px 0;
     font-size: 12px;
-    font-family: 'Press Start 2P', monospace; /* Jika pakai pixel font */
+    font-family: 'Press Start 2P', monospace;
     z-index: 9999;
     box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
 }
 
-/* Menambahkan margin atau padding pada konten utama agar tidak tertutup footer */
 body {
-    padding-bottom: 40px;  /* Memberikan ruang pada bagian bawah konten utama */
+    padding-bottom: 40px;
 }
 
 .yoedzx {
@@ -207,7 +243,6 @@ body {
     gap: 10px;
 }
 
-/* Button styling */
 .pixel-button {
     border: 4px solid var(--dark-color);
     padding: 8px 12px;
@@ -215,8 +250,8 @@ body {
     font-family: 'Courier New', monospace;
     background-color: var(--button-bg, var(--accent-color));
     color: var(--button-label-color, var(--button-text));
-  border: 2px solid var(--accent-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+    border: 2px solid var(--accent-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .modal-content h3 {
@@ -256,7 +291,7 @@ h1, h2, h3 {
 .cancel-btn {
     background-color: #ef9a9a;
 }
-/* Input field styling */
+
 .pixel-input,
 textarea.pixel-input {
     background-color: white;
@@ -269,7 +304,6 @@ textarea.pixel-input {
     box-shadow: 4px 4px 0 var(--dark-color);
 }
 
-/* Prevent text overflow */
 .pixel-input::placeholder {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -313,7 +347,6 @@ textarea.pixel-input {
     background-color: #ffffff;
     border: 1px solid #ccc;
     padding: 10px;
-    border-radius: 4px;
     box-sizing: border-box;
 }
 
@@ -332,9 +365,9 @@ textarea.pixel-input {
     background-color: #222;
     color: #fff;
     padding: 2px 6px;
-    border-radius: 4px;
     font-size: 0.8em;
     margin-left: 8px;
+    border-radius: 4px; /* Tambahkan ini */
 }
 
 .clock-wrapper {
@@ -349,7 +382,6 @@ textarea.pixel-input {
     0% {
         width: 50px;
         height: 30px;
-        border-radius: 4px;
         opacity: 0;
         transform: scale(0.8) translateY(-10px);
         filter: blur(1px);
@@ -357,7 +389,6 @@ textarea.pixel-input {
     50% {
         width: auto;
         height: 30px;
-        border-radius: 8px;
         opacity: 0.9;
         transform: scale(1.02) translateY(0);
         filter: blur(0.5px);
@@ -365,7 +396,6 @@ textarea.pixel-input {
     100% {
         width: auto;
         height: 30px;
-        border-radius: 8px;
         opacity: 1;
         transform: scale(1) translateY(0);
         filter: blur(0);
@@ -381,7 +411,6 @@ textarea.pixel-input {
     }
 }
 
-/* ANIMASI UTAMA */
 @keyframes slideIn {
     0% {
         opacity: 0;
@@ -414,7 +443,6 @@ textarea.pixel-input {
     }
 }
 
-/* STYLE UTAMA */
 .retro-box {
     display: inline-block;
     border: 2px solid var(--dark-color);
@@ -432,19 +460,15 @@ textarea.pixel-input {
     color: var(--text-color);
 }
 
-/* Animasi Keluar */
 .retro-box.exit {
     animation: slideOut 0.4s cubic-bezier(0.6, -0.3, 0.74, 0.05) forwards;
 }
 
-/* ELEMEN NOTIFIKASI */
 .time-notice {
     font-size: 14px;
     background-color: var(--accent-color);
     color: var(--button-text);
     padding: 4px 8px;
-    border-radius: 4px;
-    margin-top: 8px;
     display: inline-block;
     animation: 
         pixelGlow 1.5s ease-in-out infinite,
@@ -456,13 +480,11 @@ textarea.pixel-input {
     transform-origin: center;
 }
 
-/* ANIMASI TAMBAHAN */
 @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-2px); }
 }
 
-/* DETAIL PIXEL */
 .retro-box::before {
     content: '';
     position: absolute;
@@ -515,7 +537,6 @@ textarea.pixel-input {
     background-color: var(--accent-color);
     color: var(--button-text);
     padding: 4px 8px;
-    border-radius: 4px;
     margin-top: 8px;
     display: inline-block;
     animation: 
@@ -549,7 +570,6 @@ textarea.pixel-input {
     }
 }
 
-/* Hover effects */
 .retro-box:hover {
     transform: translateY(-2px);
     box-shadow: 
@@ -585,7 +605,6 @@ textarea.pixel-input {
     font-size: 14px;
 }
 
-/* Share Code specific styles */
 .code-item pre {
     background-color: #f0f8ff;
     border: 3px solid var(--dark-color);
@@ -595,7 +614,6 @@ textarea.pixel-input {
     font-family: 'Courier New', monospace;
     font-size: 14px;
     box-shadow: inset 3px 3px 0 #d0e0f0;
-    border-radius: 0;
     white-space: pre-wrap;
     word-wrap: break-word;
 }
@@ -604,7 +622,6 @@ textarea.pixel-input {
     margin-top: 10px;
 }
 
-/* Fix the pixel art style for all cards */
 .item-card {
     background-color: var(--light-color);
     border: 4px solid var(--dark-color);
@@ -614,13 +631,11 @@ textarea.pixel-input {
     position: relative;
 }
 
-/* URL handling */
 .item-card p {
     margin: 8px 0;
     word-break: break-word;
 }
 
-/* Responsive fixes */
 @media (max-width: 768px) {
     .container {
         padding: 10px;
@@ -631,7 +646,6 @@ textarea.pixel-input {
     }
 }
 
-/* Social Media Compact Styles */
 .social-container {
     display: flex;
     flex-wrap: wrap;
@@ -645,7 +659,6 @@ textarea.pixel-input {
     justify-content: center;
     width: 40px;
     height: 40px;
-    border-radius: 4px;
     text-decoration: none;
     color: white;
     font-size: 18px;
@@ -659,7 +672,6 @@ textarea.pixel-input {
     box-shadow: 1px 1px 0 var(--dark-color);
 }
 
-/* Warna platform */
 .social-btn.whatsapp { background-color: #25D366; }
 .social-btn.instagram { background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D); }
 .social-btn.facebook { background-color: #1877F2; }
@@ -668,7 +680,6 @@ textarea.pixel-input {
 .social-btn.github { background-color: #333; }
 .social-btn.twitter { background-color: #1DA1F2; }
 
-/* Tooltip untuk menunjukkan nama platform */
 .social-btn {
     position: relative;
 }
@@ -682,7 +693,6 @@ textarea.pixel-input {
     background-color: var(--dark-color);
     color: white;
     padding: 3px 8px;
-    border-radius: 4px;
     font-size: 12px;
     white-space: nowrap;
     opacity: 0;
@@ -694,7 +704,6 @@ textarea.pixel-input {
     opacity: 1;
 }
 
-/* Better button spacing */
 .item-actions {
     display: flex;
     flex-wrap: wrap;
@@ -702,13 +711,11 @@ textarea.pixel-input {
     margin-top: 12px;
 }
 
-/* Responsive text */
 .item-card h3 {
     font-size: 1.1rem;
     margin-bottom: 8px;
 }
 
-/* Fix endpoint display */
 .item-card p strong {
     display: inline-block;
     min-width: 70px;
@@ -727,7 +734,6 @@ textarea.pixel-input {
     margin-top: 20px;
 }
 
-/* Fix for login form overflow */
 .login-form {
     display: flex;
     gap: 8px;
@@ -752,7 +758,6 @@ textarea.pixel-input {
     white-space: nowrap;
 }
 
-/* Header container fix */
 .pixel-header {
     display: flex;
     justify-content: space-between;
@@ -789,33 +794,25 @@ textarea.pixel-input {
     max-width: 600px;
     max-height: 80vh;
     overflow-y: auto;
+    background: var(--light-color);
+    border: 3px solid var(--accent-color);
+    padding: 2rem;
+    width: 90%;
+    max-width: 700px;
+    margin: auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+    animation: popUp 0.3s ease-in-out;
 }
 
-/* Modal content style */
-.modal-content {
-  background: var(--light-color); /* Sesuaikan dengan tema */
-  border: 3px solid var(--accent-color);
-  border-radius: 15px;
-  padding: 2rem;
-  width: 90%;
-  max-width: 700px;
-  margin: auto;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-  position: relative;
-  overflow: hidden;
-  animation: popUp 0.3s ease-in-out;
-}
-
-/* Pixel Box with animation */
 .pixel-box {
-  background: var(--light-color); /* Sesuaikan dengan tema */
+  background: var(--light-color);
   position: relative;
   overflow: hidden;
-  border-radius: 15px;
   animation: pixelPop 0.4s ease-in-out forwards;
 }
 
-/* Pixelated border effect */
 .pixel-box::before {
   content: "";
   position: absolute;
@@ -827,7 +824,6 @@ textarea.pixel-input {
   animation: pixelMovement 0.5s linear infinite;
 }
 
-/* Pixel Movement Animation */
 @keyframes pixelMovement {
   0% {
     background-position: 0 0;
@@ -837,7 +833,6 @@ textarea.pixel-input {
   }
 }
 
-/* Animation for modal popup */
 @keyframes popUp {
   0% {
     opacity: 0;
@@ -849,7 +844,6 @@ textarea.pixel-input {
   }
 }
 
-/* Animation for pixel box "pop" effect */
 @keyframes pixelPop {
   0% {
     transform: scale(0.85);
@@ -861,14 +855,12 @@ textarea.pixel-input {
   }
 }
 
-/* Text animation - Fade-in quickly */
 .pixel-box * {
   position: relative;
   z-index: 2;
   animation: textFadeIn 0.3s ease-out;
 }
 
-/* Text Fade-in Animation */
 @keyframes textFadeIn {
   0% {
     opacity: 0;
@@ -897,7 +889,6 @@ pre {
     border: 1px solid #ddd;
 }
 
-/* Responsive fixes */
 @media (max-width: 768px) {
     .login-form {
         width: 100%;
@@ -947,7 +938,6 @@ pre {
     }
 }
 
-/* Add these new styles */
 #apiOutput img,
 #apiOutput video {
     max-height: 300px;
@@ -970,7 +960,6 @@ pre {
     overflow-y: auto;
 }
 
-/* Pixel Art Alert Styles */
 .pixel-alert {
   display: none;
   position: fixed;
@@ -1000,7 +989,6 @@ pre {
   font-size: 14px;
 }
 
-/* Code Filter Styles */
 .code-filter {
     padding: 15px;
     margin-bottom: 20px;
@@ -1046,7 +1034,6 @@ pre {
   100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
 
-/* Alert overlay */
 .alert-overlay {
   position: fixed;
   top: 0;
@@ -1058,7 +1045,6 @@ pre {
   display: none;
 }
 
-/* Edit Modal Styles */
 .pixel-modal {
     display: none;
     position: fixed;
@@ -1141,7 +1127,6 @@ button:focus {
   box-shadow: none;
 }
 
-/* Welcome Notification Styles */
 .welcome-overlay {
   display: none;
   position: fixed;
