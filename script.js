@@ -1,6 +1,6 @@
 const app = {
     // Configuration
-    GITHUB_USERNAME: 'shinzxyz',
+    GITHUB_USERNAME: 'srepett',
     GITHUB_TOKEN: '', // awalnya kosong
     REPO: 'webku',
     FILE_PATH: 'data.json',
