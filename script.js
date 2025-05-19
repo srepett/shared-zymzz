@@ -1,8 +1,8 @@
 const app = {
     // Configuration
     GITHUB_USERNAME: 'srepett',
-    GITHUB_TOKEN: '', // awalnya kosong
-    REPO: 'webku',
+    GITHUB_TOKEN: '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', // awalnya kosong
+    REPO: 'webcu',
     FILE_PATH: 'data.json',
     THEME_KEY: 'selectedTheme',
 
